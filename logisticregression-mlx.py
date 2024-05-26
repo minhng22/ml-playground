@@ -30,7 +30,7 @@ def loss_fn(w):
     logits = X @ w
     return mx.mean(mx.logaddexp(0.0, logits) - y * logits)
 
-mx.set_default_device(mx.cpu)
+mx.set_default_device(mx.gpu)
 grad_fn = mx.grad(loss_fn)
 
 tic = time.time()
