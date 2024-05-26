@@ -2,14 +2,14 @@ import pandas as pd
 import time
 import numpy as np
 
-data = pd.read_csv('./data/HMC.csv')
+data = pd.read_csv('./data/realestate.csv')
 
 ##----------------- Data -----------------##
 # process data
-prod = np.array(data['Open'].values)
+prod = np.array(data['Sale Amount'].values)
 
-train = prod[:870]
-test = prod[870:]
+train = prod[:8700]
+test = prod[8700:]
 print(
     f"shape of train: {train.shape} "
     f"shape of test: {test.shape}"
@@ -95,7 +95,7 @@ for epoch in range(num_epochs):
 
         # Forward pass
         outputs = model(X_batch)
-        loss = criterion(outputs, y_batch)
+        loss = criterion(outputs, torch.reshape(y_batch, (y_batch.shape[0], 1)))
 
         # Backward pass and optimization
         optimizer.zero_grad()

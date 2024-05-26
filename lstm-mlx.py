@@ -8,14 +8,14 @@ import torch
 from sklearn.metrics import r2_score, mean_squared_error
 import mlx.core as mx
 
-data = pd.read_csv('./data/HMC.csv')
+data = pd.read_csv('./data/realestate.csv')
 
 ##----------------- Data -----------------##
 # process data
-prod = np.array(data['Open'].values)
+prod = np.array(data['Sale Amount'].values)
 
-train = prod[:870]
-test = prod[870:]
+train = prod[:8700]
+test = prod[8700:]
 print(
     f"shape of train: {train.shape} "
     f"shape of test: {test.shape}"
@@ -63,7 +63,7 @@ num_epochs = 100
 learning_rate = 1e-1
 
 model = SimpleLSTM(input_size, hidden_size, output_size)
-mx.eval(model.parameters())
+mx.set_default_device(mx.gpu)
 
 tic = time.time()
 
