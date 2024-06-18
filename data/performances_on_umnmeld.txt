@@ -1,5 +1,12 @@
 # m3 max 48gb ram. mb pro 16"
-ETR: 171s
-RFR: 64s
-XGB: 9s
-RAM consumption: 38gb
+ETR: 171 s
+RFR: 64 s
+XGB: 9 s
+RAM consumption: 38 gb
+
+
+# m1 pro 32gb ram. mb pro 16"
+RFR: 140 s
+ETR: 320 s
+XGB: 8 s
+RAM consumption: 32 gb
