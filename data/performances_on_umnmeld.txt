@@ -10,3 +10,9 @@ RFR: 140 s
 ETR: 320 s
 XGB: 8 s
 RAM consumption: 32 gb
+
+# m1 pro 32gb ram. mb pro 16"
+RFR: 145 s
+ETR: 394 s
+XGB: 8 s
+RAM consumption: 24 gb
