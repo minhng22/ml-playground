@@ -44,20 +44,21 @@ aggregated_hazard = new_data.groupby('id')['partial_hazard'].sum()
 
 # To calculate the survival function, combine the aggregated hazard with the baseline survival function
 baseline_survival = ctv.baseline_survival_
-print(f'Baseline survival: \n{baseline_survival}')
-
-# Example time points to evaluate the survival function
-time_points = [5, 10, 15, 20, 25]
 
 # Calculate the survival function for each individual in new_data
-survival_functions = []
+time_points = baseline_survival.index
+predicted_times = []
 
 for idx, (ind, hazard) in enumerate(aggregated_hazard.items()):
     survival_function = baseline_survival ** hazard
-    survival_functions.append((ind, survival_function.loc[time_points]))
+    survival_function = survival_function.reset_index()
+    survival_function.columns = ['timeline', 'survival']
 
-# Print the survival function for each individual at the specified time points
-for ind, sf in survival_functions:
-    print(f"Survival function for individual {ind}:")
-    print(sf)
+    # Find the time where the survival probability drops below a threshold (e.g., 0.5 for median survival time)
+    median_survival_time = survival_function[survival_function['survival'] <= 0.5].iloc[0]['timeline']
+    predicted_times.append((ind, median_survival_time))
+
+# Print the predicted time to event (median survival time) for each individual
+for ind, tte in predicted_times:
+    print(f"Predicted time to event for individual {ind}: {tte}")
 
